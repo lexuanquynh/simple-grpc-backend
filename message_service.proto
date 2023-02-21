@@ -1,27 +1,30 @@
-systax = "proto3";
+syntax = "proto3";
 
-option go_package = "github.com/lexuanquynh/simple-grpc-backend/proto";
+option go_package = "github.com/lexuanquynh/simple-grpc-backend/proto/message";
 
 import "google/api/annotations.proto";
 
-message MessageOne {
+message MessageOne{
   string id = 1;
   string msg = 2;
 }
 
-message MessageID {
+message MessageID{
   string id = 1;
 }
 
-service MessageService {
-  rpc GetMessage(MessageID) returns (MessageOne);
-  rpc CreateMessage(MessageOne) returns (MessageOne);
-  rpc UpdateMessage(MessageOne) returns (MessageOne);
-  rpc DeleteMessage(MessageID) returns (MessageOne);
-}
+service MessageService{
+  rpc getMessage(MessageID) returns (MessageOne){
+    option (google.api.http) = {
+      get: "/v1/msg/{id}"
+    };
+  }
 
-rpc GetMessage(MessageID) returns (MessageOne) {
-  option (google.api.http) = {
-    get: "/v1/message/{id}"
-  };
+  rpc createMessage(MessageOne) returns (MessageID){
+    option (google.api.http) = {
+      post: "/v1/msg"
+      body: "*"
+    };
+  }
+
 }

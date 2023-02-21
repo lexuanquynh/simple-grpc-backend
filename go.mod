@@ -3,6 +3,7 @@ module simpleGRPC-Quynhlx
 go 1.19
 
 require (
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0
 	google.golang.org/genproto v0.0.0-20230216225411-c8e22ba71e44
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
